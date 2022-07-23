@@ -13,7 +13,7 @@ st.set_page_config(layout="wide")
 with st.sidebar:
     
     choose = option_menu("Welcome", ["Home", "Tech Stack","Predictor","ML Code", "Contributors"],
-                         icons=['house', 'stack', 'robot','terminal', 'people-fill'],
+                         icons=['house', 'stack', 'cpu','terminal', 'people-fill'],
                          menu_icon="clipboard-data", default_index=0, 
                          styles={
                             "container": {"padding": "5!important", "background-color": "#1a1a1a"},
@@ -35,44 +35,44 @@ def html():
     scrolling=True,
 )
 def pred():
-    st.title("TELECOM CUSTOMER CHURN MODELLING")
+    st.title("TELECOM CUSTOMER CHURN MODEL")
 
     Gender = st.selectbox(" ", ('Male', 'Female'))
-    st.write('Gender')
+    st.write('Gender of the customer')
     Partner = st.selectbox("  ", ('Yes', 'No'))
-    st.write('Partner')
+    st.write('Marital Status ?')
     Dependents = st.selectbox("   ", ('Yes', 'No'))
-    st.write('Dependents')
+    st.write('Does the customer have any dependents ?')
     PhoneService = st.selectbox("    ", ('Yes', 'No'))
-    st.write('PhoneService')
+    st.write('Has the customer availed the Phone Service ?')
     MultipleLines = st.selectbox("     ", ('Yes', 'No','No phone service'))
-    st.write('MultipleLines')
+    st.write('Has the customer availed Multiple Lines ?')
     InternetService = st.selectbox("      ", ('Fiber optic','DSL', 'No'))
-    st.write('InternetService')
+    st.write('Does the customer use Internet Service ?')
     OnlineSecurity = st.selectbox("        ", ('Yes', 'No','No internet service'))
-    st.write('OnlineSecurity')
+    st.write('Has the customer opted for Online Security ?')
     OnlineBackup = st.selectbox("                  ", ('Yes', 'No','No internet service'))
-    st.write('OnlineBackup')
+    st.write('Has the customer opted for Online Backup ?')
     DeviceProtection = st.selectbox("                   ", ('Yes', 'No','No internet service'))
-    st.write('DeviceProtection')
+    st.write('Has the customer opted for Device Protection ?')
     TechSupport = st.selectbox("                              ", ('Yes', 'No','No internet service'))
-    st.write('TechSupport')
+    st.write('Has the customer opted for Tech Support ?')
     StreamingTV = st.selectbox("                                    ", ('Yes', 'No','No internet service'))
-    st.write('StreamingTV')
+    st.write('Does the customer stream TV ?')
     StreamingMovies = st.selectbox("                                   ", ('Yes', 'No','No internet service'))
-    st.write('StreamingMovies')
+    st.write('Does the customer stream movies ?')
     Contract = st.selectbox("                                                 ", ('Month-to-month','One year','Two year'))
-    st.write('')
+    st.write('What is the term of contract ?')
     SeniorCitizen = st.selectbox("                 ", ('Yes', 'No'))
-    st.write('SeniorCitizen')
+    st.write('Is the customer a senior citizen ?')
     if SeniorCitizen=='Yes':
         SeniorCitizen=1
     else:
         SeniorCitizen=0
-    MonthlyCharges = st.number_input(' ', max_value= 77777777)
-    st.write('Monthly Charges')
-    TotalCharges = st.number_input('   ', max_value= 797777777)
-    st.write("Total Charges")
+    MonthlyCharges = st.number_input(' ', max_value= 1000000)
+    st.write('Monthly cost charged to the customer ?')
+    TotalCharges = st.number_input('   ', max_value= 50000000)
+    st.write("Total cost charged to the customer for the present term")
     st.write(" ")
     df = pd.DataFrame({'gender': [Gender], 'Partner': [Partner], 'Dependents': [Dependents], 'PhoneService': [PhoneService], 'MultipleLines':[MultipleLines], 'InternetService':[InternetService], 'OnlineSecurity':[OnlineSecurity], 'OnlineBackup':[OnlineBackup], 'DeviceProtection':[DeviceProtection], 'TechSupport':[TechSupport], 'StreamingTV':[StreamingTV], 'StreamingMovies':[StreamingMovies], 'Contract': [Contract], 'SeniorCitizen':[SeniorCitizen], 'MonthlyCharges':[MonthlyCharges], 'TotalCharges':[TotalCharges]})
     df = df[['gender', 'Partner', 'Dependents', 'PhoneService','MultipleLines', 'InternetService', 'OnlineSecurity', 'OnlineBackup','DeviceProtection', 'TechSupport', 'StreamingTV', 'StreamingMovies','Contract', 'SeniorCitizen', 'MonthlyCharges', 'TotalCharges']]
@@ -80,9 +80,9 @@ def pred():
     if(st.button("Submit")):
         ans = bool((model.predict(X)[0]))
         if ans:
-            st.error("Customer Is probably Going To Unsubscribe The Service")
+            st.error("The customer might plan to unsubscribe the service")
         else:
-            st.success("Customer Is Happy With The Service")
+            st.success("The customer seems to enjoy the service")
 
 with open('techstack.html','r') as f:
   techstack=f.read();
@@ -107,13 +107,25 @@ if choose=="Predictor":
     pred()
 elif choose=="Home":
     st.title('AI for Business Development')
-    st.markdown("<p style='text-align: justify;'>The objective of the project is to diagnostically predict whether or not a patient has Type 2 diabetes. \nThis predictor is built for Women above 21 years of age. The dataset, originally from the National Institute of Diabetes and Digestive and Kidney Diseases, used for this project consists of several medical predictor variables and one target variable, Outcome. Predictor variables includes the number of pregnancies the patient has had, their BMI, insulin level, age, and so on.</p>", unsafe_allow_html=True)
+    
+    st.subheader("Business Aspect")
+    st.markdown("<p style='text-align: justify;'>Apart from revenue generation and positive sentiment, a crucial growth parameter for any business is <b><i>retention</i></b> of its customers. A technical term for this is called <b><i>churn</i></b>. This parameter provides insights on how strongly an existing customer is motivated to leave the service/product sold by a company. Later, special deals can be offered to the ones who have a higher churn score.</p>", unsafe_allow_html=True)
+    st.write('')
+    st.write('')
+
+    st.subheader("How does this work ?")
+    st.markdown("<p style='text-align: justify;'>This project diagnostically predicts whether a customer of a telecom company plans on continuing the service for next term. Customer data used to train our Machine Learning model includes data such as Gender, Marital status, different types of services, type of contract, streaming preferences and the charges incurred by the customer.</p>", unsafe_allow_html=True)
+
+    st.write('')
+    st.write('')
+    st.subheader("What next ?")
+    st.markdown("<p style='text-align: justify;'>The results can be used as inputs for a dynamic pricing system which offers great deals to retain the customer. These results can also be fed to a recommendation engine which recommends plans/services which are affordable to the customer.</p>", unsafe_allow_html=True)
 
     # st.markdown("<h1 style='text-align: center;'>Healthcare AI</h1>", unsafe_allow_html=True)
 
-    with open("pic.html",'r') as f:
-        pic=f.read();
-    components.html(pic, height=400)
+    # with open("pic.html",'r') as f:
+    #     pic=f.read();
+    # components.html(pic, height=400)
 
     # def load_lottieurl(url: str):
     #     r = requests.get(url)
